@@ -1,0 +1,38 @@
+{% extends "selection.html" %}
+{% block title %}{{ app.name }}任务清单{% endblock %}
+{% block javascript %}
+    <script type="text/javascript" src="{{ STATIC_URL }}/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/feedback.js"></script>
+{% endblock %}
+{% block column2 %}
+    <h2 class="firstHeading">每日任务清单 - {{ app.name }}({{ app.code  }})</h2>
+    <div class="mark_chk">
+        <input type="checkbox" id="mark_my_tasks" {% if mark_my_tasks %}checked="checked"{% endif %} name="mark_my_tasks" />
+        <label>标记跟我有关的任务</label>
+    </div>
+    {% for wd in working_days %}
+        <div>日期：{{ wd.year }}-{{ wd.month }}-{{ wd.day }}</div>
+        {% if wd.desc %}<div>备注：{{ wd.desc }}</div>{% endif %}
+        {{ wd.schedule_table|safe }}
+        <div class="feedback" data-wordingday-id="{{ wd.id }}">
+            <a class="link_feedback" data-status="init" href="javascript:void(0);"><span>进度反馈</span></a>
+        </div>
+    {% endfor %}
+
+    {% if working_days.object_list.count > 0 %}
+    <div class="m_pagination">
+	<span class="current">
+            第 {{ working_days.number }} 页 / 共 {{ working_days.paginator.num_pages }} 页
+    </span>
+    <span class="step-links">
+        {% if working_days.has_previous %}
+            <a href="?page={{ working_days.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        {% if working_days.has_next %}
+            <a href="?page={{ working_days.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% load url from future %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>{% block title %}{% endblock %} - 指易达电子商务有限公司</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="yibai,me" />
+        <meta name="description" content="" />
+        <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen" />
+        {% block style %}{% endblock %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="{% url 'utils.views.global_js' %}"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/csrf_token.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/widgets.js"></script>
+        {% block javascript %}{% endblock %}
+    </head>
+    <body>
+    <div id="header_background">
+        <div id="header">
+            <div id="logo">
+                <a href="{% url 'home' %}"><img alt="yibai.me" src="{{ STATIC_URL }}images/logo.png" /></a>
+            </div>
+            <div id="sub_title">
+                <span>{% block sub_title %}{% endblock %}</span>
+                <span>{{ user.last_name }}{{ user.first_name }}</span>
+            </div>
+        {% if user.is_authenticated %}
+            <div id="logout">
+                <a href="{% url 'reset_password' %}">修改密码</a> | 
+                <a href="{% url 'logout' %}">退出</a>
+            </div>
+        {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="content">
+        <div id="page">
+            {% block page %}{% endblock %}
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="roll"><div title="回到顶部" id="roll_top"></div><div title="转到底部" id="roll_bottom"></div></div>
+    {% block footer %}
+        <div id="footer" class="footer">
+            <p>
+                <span>&copy;&nbsp;Copyright {% now 'Y' %}. All Rights Reserved.</span>
+                <span>指易达电子商务有限公司</span> |
+                <a href="{% url 'login' %}">开发人员登录</a> | 
+                <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备10225501号-1</a>
+            </p>
+        </div>
+    {% endblock %}
+    {% csrf_token %}
+    </body>
+</html>

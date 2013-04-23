@@ -1,0 +1,56 @@
+{% extends "selection.html" %}
+{% block title %}{{ doc.name }}{% endblock %}
+{% block column2 %}
+    <h2 class="firstHeading">{{ doc.name }}</h2>
+    <p>{{ doc.desc }}</p>
+
+    <h3 class="doc_title">
+        <span>Ajax URL</span>
+    </h3>
+    <p>{{ doc.url }}</p>
+
+    <h3 class="doc_title">
+        <span>支持格式</span>
+    </h3>
+    <p>{{ doc.data_type }}</p>
+
+    <h3 class="doc_title">
+        <span>请求方式</span>
+        <em class="title_notes">(POST/GET为HTTP请求，INNER为内部方法调用)</em>
+    </h3>
+    <p>{{ doc.calling_method }}</p>
+
+    <h3 class="doc_title">
+        <span>是否需要登录</span>
+    </h3>
+    <p>{{ doc.authentication_required }}</p>
+
+    <h3 class="doc_title">
+        <span>请求参数</span>
+    </h3>
+    <div>{{ doc.input_parameters|safe }}</div>
+
+    <h3 class="doc_title">
+        <span>返回结果</span>
+    </h3>
+    <p>数据示例：</p>
+    <div class="code_sample">
+        <pre><code>{{ doc.return_sample_data|safe }}</code></pre>
+    </div>
+
+    <h3 class="doc_title">
+        <span>字段说明</span>
+    </h3>
+    <div>{{ doc.return_data_desc|safe }}</div>
+
+    <h3 class="doc_title">
+        <span>说明</span>
+    </h3>
+    <p>{{ doc.notes }}</p>
+
+    <h3 class="doc_title">
+        <span>文档创建/更新时间</span>
+    </h3>
+    <p>{{ doc.create_datetime }} / <span {% if doc.create_datetime != doc.update_datetime %}style="color: #ff0000;"{% endif %}>{{ doc.update_datetime }}</span></p>
+
+{% endblock %}

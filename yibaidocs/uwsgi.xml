@@ -1,0 +1,17 @@
+<uwsgi>
+    <socket>127.0.0.1:9020</socket>
+    <chdir>/srv/www/developer.zeeeda.com/yibaidocs</chdir>
+    <pythonpath>..</pythonpath>
+    <module>wsgi</module>
+    <socket-timeout>120</socket-timeout>
+    <max-requests>5000</max-requests>
+    <processes>4</processes>
+    <workers>8</workers>
+    <master>true</master>
+    <enable-threads>true</enable-threads>
+    <pidfile>/tmp/developer.zeeeda.com-master.pid</pidfile>
+    <vacuum>true</vacuum>
+    <harakiri>20</harakiri>
+    <close-on-exec>true</close-on-exec>
+    <deamonize>/var/log/developer.zeeeda.com-uwsgi.log</deamonize>
+</uwsgi>

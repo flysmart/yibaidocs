@@ -1,0 +1,20 @@
+{% extends "selection.html" %}
+{% block title %}{{ app.name }}API文档{% endblock %}
+{% block column2 %}
+    <h2 class="firstHeading">{{ app.name }}API文档</h2>
+    <div class="api_categories">
+        <ul>
+            {% for c in categories %}
+                <li><a href="#c_{{ c.code }}">{{ c.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div>注：标记为<img src="{{ STATIC_URL }}images/out_link.gif" />的是外部接口。</div>
+    <div class="clear"></div>
+    {% for c in categories %}
+        <div class="list_div" id="c_{{ c.code }}">
+        {{ c.list_snippet|safe }}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load url from future %}
+{% block page %}
+    <div id="doc_contents" class="box corners">
+        <div id="column1">
+            <ul>
+                <li class="{% if high_light_code == 'home' %}h_lvl1{% else %}lvl1{% endif %}">
+                    <img src="{{ STATIC_URL }}images/home_32.png" alt="" />
+                    <a href="{% url 'doc.views.home' %}">首页</a>
+                </li>
+                <li class="lvl1">
+                    <img src="{{ STATIC_URL }}images/calendar_alt_fill_32x32.png" alt="" />
+                    <a href="javascript:void(0);">每日任务清单</a>
+                </li>
+            {% for app in apps %}
+                <li class="{% if s_high_light_code ==  app.code %}h_lvl2{% else %}lvl2{% endif %}">
+			<a href="{% url 'schedule.views.daily_schedule' app.code %}">{{ app.name }}({{ app.code }})</a>
+                </li>
+            {% endfor %}
+                <li class="lvl1">
+                    <img src="{{ STATIC_URL }}images/maintenance.png" alt="" />
+                    <a href="javascript:void(0);">APIs</a>
+                </li>
+            {% for application in apps %}
+                <li class="{% if high_light_code == application.code %}h_lvl2{% else %}lvl2{% endif %}">
+                    <a href="{% url 'doc.views.api_home' application.code %}">{{ application.name }}({{ application.code }})</a>
+                </li>
+            {% endfor %}
+            </ul>
+            {% block column1 %}{% endblock %}
+        </div>
+
+        <div id="column2">
+            {% block column2 %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}开发文档{% endblock %}
+{% block sub_title %}开发文档{% endblock %}
+{% block page %}
+<div id="login_box" class="box corners">
+    <div class="left_login_box">
+        <form id="login_form" action="" method="post">{% csrf_token %}
+            <p><label for="email">E-mail:</label> <input class="input_l" type="text" name="email" value="{{ input_email }}" id="email"></p>
+            <p><label for="password">密 码:</label> <input class="input_l" type="password" name="password" value="" id="password"></p>
+
+            <p id="login_buttons">
+                <input class="btn" id="btn_submit_login" type="submit" value="登 录" />
+            </p>
+        </form>
+        {% if login_failure %}
+        <div class="notice">
+            <span class="errorlist">登录失败！ 请确认用户密码重新登录。</span> <br /> <br />
+        </div>
+        {% else %}
+        <div class="notice">
+            <span>注意事项：</span> <br>
+            <span>开发人员的登录账号，请联系管理人员获取。</span>
+        </div>
+        {% endif %}
+    </div>
+    <div class="right_login_pic">
+        <img src="{{ STATIC_URL }}images/index_ad.png" alt="" />
+    </div>
+</div>
+
+{% endblock %}

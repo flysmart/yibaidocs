@@ -1,0 +1,28 @@
+{% extends "selection.html" %}
+{% load url from future %}
+{% block title %}文档首页{% endblock %}
+{% block javascript %}
+
+{% endblock %}
+{% block column1 %}
+{% endblock %}
+
+{% block column2 %}
+    <div class="s_notes">
+        下面是一些预置的项目代号列表，绿色为可用的，建立新项目时可以选择用之。<br />
+        Project Code仅限于开发时内部使用。
+    </div>
+    <div class="code_array">
+    {% for code in codes %}
+        <div class="code_tile">
+            <h2 {% if code.available %}class="code_available{% endif %}">{{ code.id }}.{{ code.code }}</h2>
+            <p>
+                <label>代号是否可用：</label>
+                <span>{% if code.available %}是{% else %}否{% endif %}</span> <br />
+                <label>说明：</label> <br />
+                <span>{{ code.desc }}</span>
+            </p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
